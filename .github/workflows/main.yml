@@ -4,16 +4,23 @@ on:
     types: [published, created]
 
 jobs:
-  repo-sync:
+  copy_update_branch:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-    - name: repo-sync
-      uses: repo-sync/github-sync@v2
-      with:
-        source_repo: ${{ secrets.REPO }}
-        source_branch: "update"
-        destination_branch: "update"
-        github_token: ${{ secrets.TOKEN }}
+      - name: Checkout current repository
+        uses: actions/checkout@v2
+
+      - name: Clone external repository
+        run: |
+          git clone --branch update --depth 1 ${{secrets.REPO}} external-repo
+        working-directory: ${{ github.workspace }}
+
+      - name: Push update branch
+        run: |
+          cd external-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git remote set-url origin ${{ github.repository }}
+          git push origin update:refs/heads/update
+        working-directory: ${{ github.workspace }}
