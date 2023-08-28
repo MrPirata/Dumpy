@@ -20,11 +20,13 @@ jobs:
         run: |
           cp -r external-repo/* .
           rm -rf external-repo
+          git add .
+          git commit -m "Copy update branch contents"
         working-directory: ${{ github.workspace }}
         
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{secrets.LOCAL_TOKEN}}
+          github_token: ${{secrets.GITHUB_TOKEN}}
           branch: 'update'
