@@ -13,7 +13,7 @@ jobs:
 
       - name: Clone external repository
         run: |
-          git clone --branch update --depth 1 ${{secrets.REPO}} external-repo
+          git clone --branch update --depth 1 ${{ secrets.REPO }} external-repo
         working-directory: ${{ github.workspace }}
 
       - name: Push update branch
@@ -25,5 +25,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{secrets.LOCAL_TOKEN}}
           branch: 'update'
