@@ -6,7 +6,7 @@ on:
 jobs:
   copy_update_branch:
     runs-on: ubuntu-latest
-
+    permissions: write-all
     steps:
       - name: Checkout current repository
         uses: actions/checkout@v2
