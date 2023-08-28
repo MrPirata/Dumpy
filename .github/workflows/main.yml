@@ -20,13 +20,13 @@ jobs:
         run: |
           cp -r external-repo/* .
           rm -rf external-repo
-          git add .
-          git commit -m "Copy update branch contents"
         working-directory: ${{ github.workspace }}
-        
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          branch: 'update'
+          branch: update
+          skip_checkout: true
+          file_pattern: build.md *-update.json
+          commit_message: Bump version
+        
