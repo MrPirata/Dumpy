@@ -29,4 +29,6 @@ jobs:
           skip_checkout: true
           file_pattern: build.md *-update.json
           commit_message: Bump version
+          push_options: '--force'
+
         
