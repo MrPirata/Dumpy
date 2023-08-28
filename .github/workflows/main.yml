@@ -19,8 +19,11 @@ jobs:
       - name: Push update branch
         run: |
           cd external-repo
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
           git remote set-url origin https://github.com/${{ github.repository }}.git
-          git push origin update
         working-directory: ${{ github.workspace }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'update'
