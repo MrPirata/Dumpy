@@ -22,5 +22,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git remote set-url origin ${{ github.repository }}
-          git push origin update:refs/heads/update
+          git push origin update:refs/heads/update --force
         working-directory: ${{ github.workspace }}
